@@ -24,6 +24,7 @@ class Driver : CliktCommand() {
     val debugGrid by option(help = "Show debug grid").flag()
     val font by option(help = "Set diagram font").default("")
     val textScale by option(help = "Modify text size by a factor").double().default(1.0)
+    val scale by option(help = "Scale the whole diagram by a factor").double().default(1.0)
 
     override fun run() {
 
@@ -34,7 +35,12 @@ class Driver : CliktCommand() {
         val matrix = CharMatrix.read(inputStream)
         val diag = Diagram.fromMatrix(
                 matrix,
-                DiagramProperties(fontSpec = font, debugGrid = debugGrid, textScale = textScale)
+                DiagramProperties(
+                        fontSpec = font,
+                        debugGrid = debugGrid,
+                        textScale = textScale,
+                        diagramScale = scale
+                )
         )
 
         val outputStream = when(output) {

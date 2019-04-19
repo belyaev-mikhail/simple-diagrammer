@@ -175,11 +175,13 @@ class Diagram(val props: DiagramProperties, val lines: List<Line>, val texts: Li
     }
 
     override fun getSize(): Dimension =
-            Dimension(cellSize / 2 + cellSize * w, cellSize / 2 + cellSize * h)
+            Dimension(cellSize / 2 + cellSize * w, cellSize / 2 + cellSize * h) * props.diagramScale
 
     override fun draw(g: Graphics2D) {
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
         g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY)
+
+        g.scale(props.diagramScale, props.diagramScale)
 
         val font = fontSpec
                 .toLowerCase()
