@@ -33,7 +33,7 @@ fun exportAsSVG(drawable: Drawable, stream: OutputStream) {
     stream.bufferedWriter().use { it.write(g.svgDocument) }
 }
 
-fun exportAsInlineSVG(drawable: Drawable): String {
+fun exportAsSVGString(drawable: Drawable): String {
     val g = SVGGraphics2D(drawable.getSize().width, drawable.getSize().height)
     drawable.draw(g)
     return g.svgDocument
@@ -45,4 +45,12 @@ fun exportAsInlinePNG(drawable: Drawable): String {
     val rawData = bb.toByteArray()
     val encoder = Base64.getEncoder()
     return "data:image/png;base64,${encoder.encodeToString(rawData)}"
+}
+
+fun exportAsInlineSVG(drawable: Drawable): String {
+    val bb = ByteArrayOutputStream()
+    exportAsSVG(drawable, bb)
+    val rawData = bb.toByteArray()
+    val encoder = Base64.getEncoder()
+    return "data:image/svg;base64,${encoder.encodeToString(rawData)}"
 }
