@@ -48,9 +48,5 @@ fun exportAsInlinePNG(drawable: Drawable): String {
 }
 
 fun exportAsInlineSVG(drawable: Drawable): String {
-    val bb = ByteArrayOutputStream()
-    exportAsSVG(drawable, bb)
-    val rawData = bb.toByteArray()
-    val encoder = Base64.getEncoder()
-    return "data:image/svg;base64,${encoder.encodeToString(rawData)}"
+    return "data:image/svg+xml;utf8,${exportAsSVGString(drawable)}"
 }
