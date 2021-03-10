@@ -21,7 +21,7 @@ jobs:
         mvn versions:set -DnewVersion=${{ github.event.release.tag_name }}
         mvn deploy -s .github/github-settings.xml || echo "deploy failed" >&2
       env:
-        GITHUB_ACTOR: $GITHUB_ACTOR
+        GITHUB_ACTOR: ${{ github.actor }}
         GITHUB_TOKEN: ${{ github.token }}
 
     - name: Move sources jar file
